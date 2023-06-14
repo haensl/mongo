@@ -60,14 +60,14 @@ commands:
     steps:
       - checkout
       - restore_cache:
-          keys: dependencies-{{ checksum "package-lock.json" }}
+          keys: deps-{{ checksum "package-lock.json" }}
       - run:
           name: install dependencies
           command: npm i
       - save_cache:
+          key: deps-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-          key: dependencies-{{ checksum "package-lock.json" }}
       - determine-versions
 
   create-test-project:
