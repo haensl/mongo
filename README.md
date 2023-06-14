@@ -87,8 +87,9 @@ The `mongo` utility wraps functions around getting a [`MongoClient`](), identify
 ### Supply connection URI once, use everywhere & graceful instance shutdown
 
 ```javascript
-// Put this into a local module to wrap @haensl/mongo
-// The idea is to generate the service once and share it across your app.
+// mongo.js
+// Wrap @haensl/mongo in a local module.
+// Generate the service once and share it across your app.
 const mongo = require('@haensl/mongo')(process.env.MONGO_URI);
 
 process.on('exit', mongo.cleanup);
