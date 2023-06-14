@@ -92,7 +92,7 @@ commands:
           at: ~/
       - create-test-project
       - run:
-          name: install jest
+          name: install jest 
           working_directory: /tmp/test-app
           command: |
             npm i -D jest
