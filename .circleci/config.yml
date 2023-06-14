@@ -162,7 +162,7 @@ jobs:
             - package.json
             - package-lock.json
             - mongo.package.test.js
-            - index.json
+            - index.js
             - .npmignore
             - haensl-mongo.tgz
 
