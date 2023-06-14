@@ -100,7 +100,7 @@ commands:
           name: install module
           working_directory: /tmp/test-app
           command: |
-            npm i -S ~/mongo
+            npm i -S ~/mongo/haensl-mongo.tgz
       - run:
           name: add test command
           working_directory: /tmp/test-app
