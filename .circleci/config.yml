@@ -92,10 +92,10 @@ commands:
           at: ~/
       - create-test-project
       - run:
-          name: install jest 
+          name: install jest and mongodb
           working_directory: /tmp/test-app
           command: |
-            npm i -D jest
+            npm i -D jest mongodb
       - run:
           name: install module
           working_directory: /tmp/test-app

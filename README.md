@@ -13,18 +13,18 @@ MongoDB utilities.
 ### Via `npm`
 
 ```bash
-$ npm install -S @haensl/mongo
+$ npm install -S @haensl/mongo mongodb
 ```
 
 ### Via `yarn`
 
 ```bash
-$ yarn add @haensl/mongo
+$ yarn add @haensl/mongo mongodb
 ```
 
 ## Usage
 
-1. [Install @haensl/mongo](#installation)
+1. [Install @haensl/mongo](#installation) _(and [`mongodb`](https://www.npmjs.com/package/mongodb), it's a peer dependency)_
 
 2. Use mongo in your projects:
 
