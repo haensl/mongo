@@ -36,5 +36,90 @@ describe('mongo service', () => {
         .toEqual(false);
     });
   });
+
+  describe('resolveKeyPath()', () => {
+    describe('if the key path does not contain sub keys', () => {
+      it('returns the property value', () => {
+        const service = mongo();
+        const mock = {
+          foo: {
+            bar: 'baz'
+          }
+        };
+
+        expect(service.resolveKeyPath(mock, 'foo.bar'))
+          .toEqual('baz');
+      });
+    });
+  });
+
+  describe('changes()', () => {
+    describe('when the patch changes a direct descendant field', () => {
+      it('properly reports the change', () => {
+        const service = mongo();
+        const mock = {
+          foo: {
+            bar: 'baz'
+          },
+          alpha: 3
+        };
+
+        const changes = service.changes(mock, {
+          alpha: 4
+        });
+
+        expect(changes)
+          .toContainEqual({
+            field: 'alpha',
+            from: 3,
+            to: 4
+          });
+      });
+    });
+
+    describe('when the patch does not change anything', () => {
+      it('reports no changes', () => {
+        const service = mongo();
+        const mock = {
+          foo: {
+            bar: 'baz'
+          },
+          alpha: 3
+        };
+
+        const changes = service.changes(mock, {
+          alpha: 3
+        });
+
+        expect(changes.length)
+          .toEqual(0);
+      });
+    });
+
+    describe('when the patch changes a subdocument', () => {
+      it('reports with key paths', () => {
+        const service = mongo();
+        const mock = {
+          foo: {
+            bar: 'baz'
+          },
+          alpha: 3
+        };
+
+        const changes = service.changes(mock, {
+          foo: {
+            bar: 'blub'
+          }
+        });
+
+        expect(changes)
+          .toContainEqual({
+            field: 'foo.bar',
+            from: 'baz',
+            to: 'blub'
+          });
+      });
+    });
+  });
 });
 

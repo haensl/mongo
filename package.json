@@ -1,6 +1,6 @@
 {
   "name": "@haensl/mongo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MongoDB utilities.",
   "main": "index.js",
   "scripts": {
