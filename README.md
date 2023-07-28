@@ -63,6 +63,10 @@ The `mongo` utility wraps functions around getting a [`MongoClient`](), identify
 // Takes Mongo connection URI.
 // Returns service object.
 ({ mongoUri }) => ({
+  // Collects the changes made to doc by the given patch.
+  // Returns an array of objects of the form { field, from , to }
+  changes: (doc, patch) => [changes],
+
   // Cleanup function to close the connection pool.
   // Invoke e.g. at instance shutdown.
   cleanup: async () => void,
@@ -78,7 +82,19 @@ The `mongo` utility wraps functions around getting a [`MongoClient`](), identify
 
   // Checks if the given Error is a MongoDB error with given code.
   // Returns a boolean.
-  isError: (error, code) => boolean
+  isError: (error, code) => boolean,
+
+  // Checks if the given patch would change the given field in doc.
+  // Returns a boolean.
+  patchChangesField: ({ doc, field, patch }) => boolean,
+
+  // Returns the value stored in obj at the given keyPath.
+  // A key path is a string like `prop.subProp`.
+  resolveKeyPath: (obj, keyPath) => any,
+
+  // Transforms a patch object (with sub objects)
+  // into a MongoDB patch (with `prop.sub`  keys)
+  translatePatchToMongoUpdate: (patch) => mongoPatch
 })
 ```
 
