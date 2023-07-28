@@ -53,6 +53,24 @@ describe('mongo service', () => {
     });
   });
 
+  describe('toMongoPatch()', () => {
+    describe('when the patch is a flat object', () => {
+      it('returns the flat object', () => {
+        const service = mongo();
+        expect(service.toMongoPatch({ name: 'unit test' }))
+          .toEqual({ name: 'unit test' });
+      });
+    });
+
+    describe('when the patch contains sub objects', () => {
+      it('flattens the objects into keyPaths', () => {
+        const service = mongo();
+        expect(service.toMongoPatch({ cycle: { length: 25 } }))
+          .toEqual({ 'cycle.length': 25 });
+      });
+    });
+  });
+
   describe('changes()', () => {
     describe('when the patch changes a direct descendant field', () => {
       it('properly reports the change', () => {

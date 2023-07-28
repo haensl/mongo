@@ -35,7 +35,7 @@ const isError = (error, code) =>
  *  Changes are described by objects of the form { field, from, to }.
  */
 const changes = (doc, patch) => {
-  const mongoPatch = translatePatchToMongoUpdate(patch);
+  const mongoPatch = toMongoPatch(patch);
   const changes = [];
 
   for (const field of Object.keys(mongoPatch)) {
@@ -69,7 +69,7 @@ const changes = (doc, patch) => {
  *  whether or not the patch changes the field.
  */
 const patchChangesField = ({ doc, field, patch }) => {
-  const mongoPatch = translatePatchToMongoUpdate(patch);
+  const mongoPatch = toMongoPatch(patch);
 
   if (!(field in mongoPatch)) {
     return false;
@@ -115,13 +115,13 @@ const resolveKeyPath = (obj, keyPath) => {
  *
  * prefix param is for recurrsion.
  */
-const translatePatchToMongoUpdate = (patch, prefix = '') =>
+const toMongoPatch = (patch, prefix = '') =>
   Object.keys(patch)
     .reduce((translatedPatch, key) => {
       if (typeof patch[key] === 'object' && !Array.isArray(patch[key]) && !(patch[key] instanceof Date)) {
         return {
           ...translatedPatch,
-          ...translatePatchToMongoUpdate(patch[key], `${prefix}${key}.`)
+          ...toMongoPatch(patch[key], `${prefix}${key}.`)
         };
       } else {
         translatedPatch[`${prefix}${key}`] = patch[key];
@@ -137,6 +137,6 @@ module.exports = ({ mongoUri } = {}) => ({
   isError,
   patchChangesField,
   resolveKeyPath,
-  translatePatchToMongoUpdate
+  toMongoPatch
 });
 

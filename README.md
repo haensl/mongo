@@ -90,11 +90,21 @@ The `mongo` utility wraps functions around getting a [`MongoClient`](), identify
 
   // Returns the value stored in obj at the given keyPath.
   // A key path is a string like `prop.subProp`.
+  // E.g. resolveKeyPath({ foo: { bar: 'baz' }}, 'foo.bar')
+  // returns 'baz'
   resolveKeyPath: (obj, keyPath) => any,
 
   // Transforms a patch object (with sub objects)
   // into a MongoDB patch (with `prop.sub`  keys)
-  translatePatchToMongoUpdate: (patch) => mongoPatch
+  // E.g.
+  // {
+  //   foo: {
+  //     bar: 'baz'
+  //   }
+  // }
+  // becomes
+  // { 'foo.bar': 'baz' }
+  toMongoPatch: (patch) => mongoPatch
 })
 ```
 
