@@ -1,6 +1,6 @@
 {
   "name": "@haensl/mongo",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "MongoDB utilities.",
   "main": "index.js",
   "scripts": {
@@ -63,7 +63,7 @@
   },
   "homepage": "https://github.com/haensl/mongo#readme",
   "peerDependencies": {
-    "mongodb": "^5.6.0"
+    "mongodb": "^6.0.0"
   },
   "devDependencies": {
     "@haensl/eslint-config": "^1.4.6",
@@ -71,6 +71,6 @@
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-junit": "^16.0.0",
-    "mongodb": "^5.6.0"
+    "mongodb": "^6.1.0"
   }
 }
