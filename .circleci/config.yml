@@ -251,7 +251,6 @@ jobs:
 workflows:
   version: 2
   default:
-    when: always
     jobs:
       - lint
       - test
