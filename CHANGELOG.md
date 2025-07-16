@@ -1,3 +1,6 @@
+## 2.0.1
+* [#8: Update dependencies.](https://github.com/haensl/mongo/issues/8)
+
 ## 2.0.0
 * [#6: **Breaking Change:** Lift mongodb driver peer dependency to v6.](https://github.com/haensl/mongo/issues/6)
 * Update dependencies.
